@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+table {
+  border-collapse: collapse; 
+  border: 1px solid;
+}
+
+tr {
+  border-bottom: 1px solid black;
+}
+
+td {
+  padding: 8px;
+}
