@@ -14,14 +14,21 @@ const messages$ = ajax.getJSON("http://localhost:3000/messages/unread").pipe(
 
 function renderMessage(message) {
   const row = document.createElement("tr");
+  const subject =
+    message.subject.length > 15
+      ? message.subject.slice(0, 15) + "..."
+      : message.subject;
+  const received = new Date(message.received).toLocaleString("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
   row.innerHTML = `
     <td>${message.from}</td>
-    ${
-      message.subject.length > 15
-        ? `<td>${message.subject.slice(0, 15)}...</td>`
-        : `<td>${message.subject}</td>`
-    }
-    <td>${message.received}</td>
+    <td>${subject}</td>
+    <td>${received}</td>
   `;
   return row;
 }
