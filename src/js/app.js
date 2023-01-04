@@ -16,14 +16,16 @@ function renderMessage(message) {
   const row = document.createElement("tr");
   row.innerHTML = `
     <td>${message.from}</td>
-    <td>${message.body}</td>
+    ${
+      message.subject.length > 15
+        ? `<td>${message.subject.slice(0, 15)}...</td>`
+        : `<td>${message.subject}</td>`
+    }
     <td>${message.received}</td>
   `;
   return row;
 }
 
 messages$.subscribe((messages) => {
-  messages
-    .map(renderMessage)
-    .forEach((row) => messagesTable.prepend(row));
+  messages.map(renderMessage).forEach((row) => messagesTable.prepend(row));
 });
